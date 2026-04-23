@@ -2,30 +2,113 @@
 
 Life OS is an early prototype for a personal thinking partner.
 
-It started as a small toy project for keeping life context around. Once I tried to think about it seriously, it turned into a broader question:
+It started as a small toy project for keeping life context around. Once I tried to think about it more seriously, it opened up into a larger question:
 
 ```text
 What would it take for an agent to understand a person's life over time?
 ```
 
-The current answer is still rough. Life OS stores moments, decisions, projects, people, worries, and open loops as small pieces of source memory. The agent should then use that memory to become a better thinking partner in later conversations.
+I want an agent that can follow the flow of a life: what happened, who was involved, what I am trying to do, what remains open, what I keep circling back to, and what context should come back later.
 
-This repo is a public, sanitized version of the real structure. It includes sample memory plus the same kind of agent instructions, adapters, config, and runtime scripts used by the private Life OS repo.
+This repo is a public, sanitized version of the structure I am using. It includes a small set of non-private example notes, the memory model, and the agent/runtime pieces that make the repo inspectable.
 
-## Core Loop
+## Core Idea
+
+The basic loop is:
 
 ```text
 conversation
 -> capture durable memory
 -> link recurring entities
--> gather slices into views
--> retrieve context later
--> improve the next conversation
+-> gather slices into useful views
+-> retrieve the right context later
+-> have a better next conversation
 ```
 
-## Runnable Shape
+The important part is not just storing notes. The interesting part is the agent behavior around memory:
 
-The repo is meant to be inspected as a working shape, not just read as a write-up.
+- when it should retrieve context
+- when it should write something down
+- when it should update an existing memory
+- when it should ask before storing
+- when it should leave the conversation uncaptured
+
+## Memory Model
+
+The model is intentionally small.
+
+### Slice
+
+A `slice` is source memory.
+
+```text
+one subject in one context
+```
+
+Examples:
+
+- a project follow-up
+- a decision
+- a concern that became clearer
+- a meeting recap
+- a system design correction
+
+Slices are plain markdown files under `slices/`.
+
+### Entity
+
+An `entity` is something that can recur across slices: a person, project, company, concept, event, or concern.
+
+Entities are linked inline:
+
+```md
+I talked with [[person-sam|Sam]] about [[life-os|Life OS]].
+```
+
+`entities/registry.yaml` resolves aliases, so different phrases can point to the same thing.
+
+### Story
+
+A `story` is a view over slices.
+
+Stories are not source memory. They are surfaces that become useful when the same source material needs to be seen from a larger angle.
+
+Examples:
+
+- this week
+- identity
+- a project thread
+- a relationship thread
+- a shareable synthesis
+
+The same slice can appear in multiple stories without duplicating source memory.
+
+## Agent Flow
+
+The intended agent loop is:
+
+1. Listen to the live user first.
+2. Decide what kind of turn this is.
+3. Retrieve only the context needed for that turn.
+4. Respond naturally.
+5. Keep track of current session slice candidates.
+6. Capture or update memory when the conversation produces durable material.
+7. Validate memory writes.
+
+The user should not have to operate the memory system manually. Search, briefing, linting, and session scratch are agent-internal tools.
+
+## What I Want To Explore
+
+The project is still early. The parts I want to push further are:
+
+- deterministic agent behavior: making memory actions less random without making the conversation rigid
+- data structure: deciding how atomic slices should be and how much structure belongs in markdown vs config
+- stories as views: letting useful surfaces emerge without turning them into fixed schemas
+- external context: deciding how email, calendar, files, GitHub, Slack, web pages, and other sources should enter the system
+- privacy: keeping real source memory private while still making the architecture shareable
+- evaluation: testing whether memory actually improves long-running conversation
+
+## Repo Map
 
 ```text
 AGENTS.md                         canonical agent contract
@@ -35,21 +118,10 @@ GEMINI.md                         Gemini import shim
 .claude/skills/life-os/            Claude Code adapter
 .gemini/extensions/life-os/        Gemini CLI adapter
 _system/docs/                      detailed system docs
-_system/life-os/config.json        paths and command config
-_system/life-os/view-workflows.json per-view lifecycle rules
-_system/life-os/scripts/           briefing/search/lint/session runtime
+_system/life-os/                   runtime config and helper scripts
 slices/                            source memory
 entities/registry.yaml             entity aliases
 stories/                           views over memory
-```
-
-You can run the same internal helper commands an agent would use:
-
-```bash
-node _system/life-os/scripts/life-os.mjs briefing
-node _system/life-os/scripts/life-os.mjs search life-os
-node _system/life-os/scripts/life-os.mjs search --entity life-os
-node _system/life-os/scripts/life-os.mjs lint
 ```
 
 ## Try It
@@ -77,52 +149,4 @@ To make your own Life OS:
 4. Open it with Codex, Claude Code, or Gemini CLI.
 5. Let the agent use `AGENTS.md` and the Life OS adapter for memory retrieval/capture.
 
-The current deterministic pieces are the helper scripts and repo conventions. A fully deterministic agent runner or hook system is still future work.
-
-## Core Objects
-
-The model is intentionally small.
-
-| Object | Role |
-| --- | --- |
-| `slice` | A small unit of source memory: one subject in one context. |
-| `entity` | A recurring person, project, company, concept, or concern. |
-| `story` | A flexible view over slices, created when a larger surface is useful. |
-
-Everything else is support structure: agent instructions, search, linting, startup briefing, and runtime scratch.
-
-## What I Want To Figure Out
-
-The interesting parts are still open:
-
-- How can the agent loop behave more deterministically?
-- What is the right data model for personal memory?
-- How should stories work as views over source memory?
-- How should external context like email, calendar, files, and web data enter the system?
-- How can private memory stay private while the architecture stays shareable?
-
-## This Sanitized Pack
-
-This folder is a shareable version of the idea. It does not include private source memory.
-
-It includes:
-
-- architecture notes
-- a roadmap of open problems
-- runnable agent/runtime structure
-- small sanitized source memory under `slices/`, `entities/`, and `stories/`
-
-The examples are derived from actual Life OS notes and edited for privacy, clarity, and shareability. They are not complete source records.
-
-## Files
-
-- `AGENTS.md`: canonical operating contract
-- `_system/docs/agent-operating-loop.md`: detailed agent loop
-- `_system/docs/knowledge-architecture.md`: detailed memory model
-- `_system/life-os/scripts/`: runnable helper scripts
-- `docs/roadmap.md`: the problems this system still needs to solve
-- `slices/`, `entities/`, `stories/`: non-private examples derived from real source memory
-
-## Status
-
-Prototype. The current system is a repo-backed memory layer with agent instructions and small deterministic helper scripts. The next step is to make the agent behavior more reliable and test whether this actually improves long-running conversation.
+The deterministic pieces today are the helper scripts and repo conventions. A fully deterministic agent runner or hook system is still future work.

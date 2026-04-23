@@ -52,6 +52,33 @@ node _system/life-os/scripts/life-os.mjs search --entity life-os
 node _system/life-os/scripts/life-os.mjs lint
 ```
 
+## Try It
+
+```bash
+git clone https://github.com/eatnug/life-os-public.git
+cd life-os-public
+
+node _system/life-os/scripts/life-os.mjs briefing
+node _system/life-os/scripts/life-os.mjs search --entity life-os
+node _system/life-os/scripts/life-os.mjs lint
+```
+
+No install step is required. The helper scripts use only Node built-ins.
+
+## Use It As Your Own
+
+This repo is a runnable skeleton, not a packaged app yet.
+
+To make your own Life OS:
+
+1. Fork or clone this repo privately.
+2. Replace the sample `slices/`, `stories/`, and `entities/registry.yaml`.
+3. Update `_system/life-os/config.json` for your timezone and paths if needed.
+4. Open it with Codex, Claude Code, or Gemini CLI.
+5. Let the agent use `AGENTS.md` and the Life OS adapter for memory retrieval/capture.
+
+The current deterministic pieces are the helper scripts and repo conventions. A fully deterministic agent runner or hook system is still future work.
+
 ## Core Objects
 
 The model is intentionally small.

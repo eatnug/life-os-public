@@ -1,0 +1,19 @@
+life-os:
+  label: Life OS
+  aliases: [Life OS, second brain, memory system, thinking partner]
+
+agent-memory:
+  label: Agent Memory
+  aliases: [agent memory, long-term memory, memory and retrieval]
+
+team-attention:
+  label: Team Attention
+  aliases: [Team Attention, AI builder community]
+
+tide:
+  label: Tide
+  aliases: [Tide, terminal agent interface]
+
+ai-hackathon:
+  label: AI Hackathon
+  aliases: [AI hackathon, builder hackathon, applied AI hackathon]

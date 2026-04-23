@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "google_workspace": {
+      "command": "/Users/eatnug/.local/bin/uv",
+      "args": [
+        "--directory",
+        "/Users/eatnug/Workspace/life/_system/tools/google_workspace_mcp",
+        "run",
+        "google-workspace-mcp"
+      ],
+      "env": {
+        "GOOGLE_WORKSPACE_MCP_TZ": "Asia/Seoul"
+      },
+      "timeout": 30000,
+      "trust": false
+    }
+  }
+}

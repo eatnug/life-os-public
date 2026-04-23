@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "timezone": "Asia/Seoul",
+  "language": {
+    "conversation": "match-user",
+    "durableNotes": "en"
+  },
+  "paths": {
+    "canonicalInstructions": "AGENTS.md",
+    "claudeInstructions": "CLAUDE.md",
+    "geminiInstructions": "GEMINI.md",
+    "slices": "slices",
+    "stories": "stories",
+    "entitiesRegistry": "entities/registry.yaml",
+    "systemDocs": "_system/docs",
+    "viewWorkflows": "_system/life-os/view-workflows.json",
+    "runtime": "_system/runtime",
+    "lifeOsRuntime": "_system/life-os",
+    "lifeOsScripts": "_system/life-os/scripts"
+  },
+  "startup": {
+    "lifecycleEvent": "session_start",
+    "systemDocs": [
+      "_system/docs/knowledge-architecture.md",
+      "_system/docs/agent-operating-loop.md"
+    ],
+    "recentSlicesLimit": 8
+  },
+  "commands": {
+    "briefing": ["node", "_system/life-os/scripts/briefing.mjs"],
+    "search": ["node", "_system/life-os/scripts/search.mjs"],
+    "lint": ["node", "_system/life-os/scripts/lint-life-os.mjs"],
+    "session": ["node", "_system/life-os/scripts/session.mjs"]
+  }
+}

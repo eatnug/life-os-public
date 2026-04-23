@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "views": [
+    {
+      "id": "identity",
+      "path": "stories/identity.md",
+      "label": "Identity",
+      "purpose": "Stable self-model view. Optional story surface, not source memory.",
+      "lifecycle": [
+        {
+          "on": "session_start",
+          "do": "read",
+          "why": "Provide stable self-context when a session begins."
+        },
+        {
+          "on": "after_turn",
+          "do": "ask_before_update",
+          "when": "The user confirms a stable self-model change."
+        }
+      ]
+    },
+    {
+      "id": "this-week",
+      "path": "stories/this-week.md",
+      "label": "This Week",
+      "purpose": "Current operating view over active slices, commitments, and near-term pressure. Optional story surface, not source memory.",
+      "lifecycle": [
+        {
+          "on": "session_start",
+          "do": "read",
+          "why": "Orient to current pressure and open loops when the view exists."
+        },
+        {
+          "on": "after_capture",
+          "do": "consider_update",
+          "when": "A captured slice creates or changes a near-term commitment, deadline, schedule item, or active open loop."
+        },
+        {
+          "on": "after_turn",
+          "do": "consider_update",
+          "when": "The user explicitly changes current priorities or asks to organize current work."
+        }
+      ]
+    }
+  ]
+}

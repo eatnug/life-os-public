@@ -1,3 +1,9 @@
+---
+at: 2026-04-23
+open: true
+subject: life-os-public-share
+---
+
 # Life OS Public Share
 
 This is a sanitized story/view derived from the example slices. It is not source memory.

@@ -1,5 +1,13 @@
 # Architecture
 
+This page is a short map. The actual runnable structure lives in the repo root:
+
+- `AGENTS.md`
+- `_system/docs/`
+- `_system/life-os/`
+- `.codex/`, `.claude/`, `.gemini/`
+- `slices/`, `entities/`, `stories/`
+
 Life OS is built around a small memory model and a strict conversational rule:
 
 ```text

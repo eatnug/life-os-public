@@ -14,7 +14,7 @@ This repo is a public, sanitized version of the structure I am using. It include
 
 ## Core Idea
 
-The basic loop is:
+The basic loop is conversation-first:
 
 ```text
 conversation
@@ -25,13 +25,16 @@ conversation
 -> have a better next conversation
 ```
 
-The important part is not just storing notes. The interesting part is the agent behavior around memory:
+In practice, that means the agent should:
 
-- when it should retrieve context
-- when it should write something down
-- when it should update an existing memory
-- when it should ask before storing
-- when it should leave the conversation uncaptured
+- listen to the live turn first
+- retrieve only the context needed for that turn
+- respond naturally
+- keep track of current session slice candidates
+- capture or update memory when the conversation produces durable material
+- validate memory writes
+
+The user should not have to operate the memory system manually. Search, briefing, linting, and session scratch are agent-internal tools.
 
 ## Memory Model
 
@@ -82,20 +85,6 @@ Examples:
 - a shareable synthesis
 
 The same slice can appear in multiple stories without duplicating source memory.
-
-## Agent Flow
-
-The intended agent loop is:
-
-1. Listen to the live user first.
-2. Decide what kind of turn this is.
-3. Retrieve only the context needed for that turn.
-4. Respond naturally.
-5. Keep track of current session slice candidates.
-6. Capture or update memory when the conversation produces durable material.
-7. Validate memory writes.
-
-The user should not have to operate the memory system manually. Search, briefing, linting, and session scratch are agent-internal tools.
 
 ## What I Want To Explore
 

@@ -53,13 +53,13 @@ It includes:
 - a roadmap of open problems
 - small sanitized examples of slices, entities, and views
 
-The examples are shaped like real memory objects, but stripped of sensitive details.
+The examples are derived from actual Life OS notes and edited for privacy, clarity, and shareability. They are not complete source records.
 
 ## Files
 
 - `docs/architecture.md`: how the memory model works
 - `docs/roadmap.md`: the problems this system still needs to solve
-- `examples/`: small non-private examples of source memory and views
+- `examples/`: non-private examples derived from real source memory
 
 ## Status
 

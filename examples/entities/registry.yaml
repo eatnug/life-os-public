@@ -6,14 +6,22 @@ agent-memory:
   label: Agent Memory
   aliases: [agent memory, long-term memory, memory and retrieval]
 
-team-attention:
-  label: Team Attention
-  aliases: [Team Attention, AI builder community]
+agent-operating-loop:
+  label: Agent Operating Loop
+  aliases: [agent loop, turn loop, operating loop]
 
-tide:
-  label: Tide
-  aliases: [Tide, terminal agent interface]
+public-share-repo:
+  label: Public Share Repo
+  aliases: [public repo, shareable repo, sanitized repo, public share pack]
 
-ai-hackathon:
-  label: AI Hackathon
-  aliases: [AI hackathon, builder hackathon, applied AI hackathon]
+codex:
+  label: Codex
+  aliases: [Codex]
+
+claude:
+  label: Claude
+  aliases: [Claude, Claude Code]
+
+gemini:
+  label: Gemini
+  aliases: [Gemini, Gemini CLI]

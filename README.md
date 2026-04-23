@@ -94,7 +94,7 @@ The project is still early. The parts I want to push further are:
 - data structure: deciding how atomic slices should be and how much structure belongs in markdown vs config
 - stories as views: letting useful surfaces emerge without turning them into fixed schemas
 - external context: deciding how email, calendar, files, GitHub, Slack, web pages, and other sources should enter the system
-- privacy: keeping real source memory private while still making the architecture shareable
+- privacy, consent, and agency: handling sensitive memory, user control, and the risk of an agent speaking or acting in ways the person would not endorse
 - evaluation: testing whether memory actually improves long-running conversation
 
 ## Repo Map

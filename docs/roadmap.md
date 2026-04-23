@@ -85,18 +85,26 @@ Next steps:
 - Capture only durable conclusions, decisions, or open loops.
 - Keep source boundaries clear.
 
-## Privacy And Sharing
+## Privacy, Consent, And Agency
 
-The real system needs private memory. A public repo needs examples.
+A useful thinking partner may need access to very private context. That creates risks beyond ordinary data security.
 
 Open questions:
 
-- What can be safely shared?
-- How do examples stay real enough to inspect?
-- How do we avoid exposing other people?
+- What should the system be allowed to know?
+- What should it remember by default, and what should require explicit consent?
+- How should a user inspect, edit, delete, or scope memory?
+- How should the system handle information about other people?
+- If an agent speaks or acts on behalf of a person, how do we prevent it from saying things the person would not endorse?
+- What should require confirmation before the agent uses the user's voice, identity, commitments, or relationships?
+- Which parts should run locally or on-device, and which parts can safely use hosted models?
+- What guardrails should exist around retrieval, impersonation, outbound messages, and action-taking?
 
 Next steps:
 
-- Maintain a sanitized public repo.
-- Include neutral slices and redacted views.
-- Keep private source memory out of public packages by default.
+- Treat external integrations as read-only by default.
+- Require confirmation for outbound communication or identity-sensitive actions.
+- Make memory inspectable and editable.
+- Keep source boundaries and provenance visible.
+- Explore local/on-device models or private execution paths for sensitive memory.
+- Build redaction and consent rules into the memory layer, not only the UI.
